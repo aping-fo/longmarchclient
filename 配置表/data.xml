@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<items>
+  <config>
+	<item client="MapCfg" server="MapCfg" file="d地图信息" /> 
+	<item client="MapPieceCfg" server="" file="d地图图片信息" /> 
+	<item client="" server="QuestionCfg" file="t题库" /> 
+	<item client="MallCfg" server="MallCfg" file="m商城" /> 
+	<item client="" server="GroupCfg" file="t团信息表" /> 
+	<item client="GroupRecordCfg" server="GroupRecordCfg" file="t团互动记录表" /> 
+  </config>
+</items>

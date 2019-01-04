@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "5c75fc3e-1eb8-4b8b-9eec-e7b9f3fb8eb1",
+  "atlasJson": "{\"width\":256,\"SubTexture\":[{\"width\":66,\"y\":1,\"height\":87,\"name\":\"panda_little1/feet_right\",\"x\":74},{\"width\":21,\"y\":90,\"height\":33,\"name\":\"panda_little1/feet_left\",\"x\":59},{\"width\":29,\"y\":84,\"height\":32,\"name\":\"panda_little1/hand_right\",\"x\":1},{\"width\":25,\"y\":84,\"height\":31,\"name\":\"panda_little1/hand_left\",\"x\":32},{\"width\":71,\"y\":1,\"height\":81,\"name\":\"panda_little1/body\",\"x\":1},{\"width\":63,\"y\":1,\"height\":74,\"name\":\"panda_little1/body_1\",\"x\":142},{\"width\":25,\"y\":77,\"height\":28,\"name\":\"panda_little_2/eye_1\",\"x\":142},{\"width\":24,\"y\":90,\"height\":27,\"name\":\"panda_little_2/eye_2\",\"x\":82}],\"height\":128,\"name\":\"NewProject_3\",\"imagePath\":\"NewProject_3_tex.png\"}",
+  "texture": "6c0d4967-612d-48de-8b66-8764e8b57890",
+  "subMetas": {}
+}

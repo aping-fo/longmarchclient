@@ -1,0 +1,17 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "rank.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "ranking_1": {
+      "__uuid__": "8d28e4de-34e1-48ba-8824-0aa33e2ee532"
+    },
+    "ranking_2": {
+      "__uuid__": "4f61a466-9fda-4787-acfa-f5930e5f5ed1"
+    },
+    "ranking_line": {
+      "__uuid__": "f02431d2-c359-49eb-9826-98e485599e10"
+    }
+  }
+}

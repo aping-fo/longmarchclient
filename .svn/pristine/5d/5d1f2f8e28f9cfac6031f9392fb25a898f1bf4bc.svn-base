@@ -1,0 +1,245 @@
+// Learn cc.Class:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
+// Learn Attribute:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+
+var UIHelper = require("UIHelper");
+var PopupTipsNode = require("PopupTipsNode");
+var GameManager = require("GameManager");
+var WXTool = require("WXTool");
+
+const FAMILY_MEMBER_MAX = 8;
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        nameLb: {
+            type: cc.Label,
+            default: null
+        },
+        
+        coinLb: {
+            type: cc.Label,
+            default: null
+        },
+
+        memberContentNode: {
+            type: cc.Node,
+            default: null
+        },
+
+        memberItemNode: {
+            type: cc.Node,
+            default: null
+        },
+
+        memberInviteNode: {
+            type: cc.Node,
+            default: null
+        },
+
+        modifyNameNode: {
+            type: cc.Node,
+            default: null
+        },
+
+        tipsNode: {
+            type: cc.Node,
+            default: null
+        },
+
+        dissolveOrExitBtn: {
+            type: cc.Node,
+            default: null
+        },
+
+        dissolveOrExitNode: {
+            type: cc.Node,
+            default: null
+        }
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+    },
+
+    start () {
+        this.dissolveOrExitNode.active = false;
+        this.tipsNode.active = false;
+        this.modifyNameNode.active = false;
+
+        this.m_isCreator = false;
+
+        var _this = this;
+        GameManager.getInstance().Family_GetInfo(function(familyInfo){
+            _this.m_isCreator = familyInfo.info.creatorOpenId == GameManager.getInstance().myInfo.openId;
+            _this.updateInfo(familyInfo);
+        });
+    },
+
+    updateInfo(familyInfo){
+        if(familyInfo.info == null){
+            this.onBackBtnClick();
+        }else{
+            this.nameLb.string = familyInfo.info.name;
+            this.coinLb.string = familyInfo.info.score;
+
+            var creatorOpenId = familyInfo.info.creatorOpenId;
+
+            familyInfo.info.groupMembers.sort(function(a,b){
+                if(creatorOpenId == a.openId){
+                    return -1;
+                }
+                if(creatorOpenId == b.openId){
+                    return 1;
+                }
+                return 0;
+            });
+            
+            this.memberInviteNode.setParent(null);
+
+            for(var i = 0; i < FAMILY_MEMBER_MAX; i++){
+                var item = this.memberContentNode.children[i];
+                var memberInfo = familyInfo.info.groupMembers[i];
+
+                if(memberInfo != null){
+                    if(item == null){
+                        item = cc.instantiate(this.memberItemNode);
+                        item.setParent(this.memberContentNode);
+                    }
+                    item.getChildByName("lb_name").getComponent(cc.Label).string = memberInfo.nickName;
+                    UIHelper.SetImageFromUrl(cc.find("touxiang1/avatar/img_avatar", item).getComponent(cc.Sprite), memberInfo.avatarUrl, true);
+                    item.name = memberInfo.openId;
+
+                    if(creatorOpenId == memberInfo.openId){
+                        cc.find("position/lb_position", item).getComponent(cc.Label).string = "群主";
+                        item.getChildByName("delete_btn").active = false;
+                    }else{
+                        cc.find("position/lb_position", item).getComponent(cc.Label).string = "成员";
+
+                        if(this.m_isCreator){
+                            item.getChildByName("delete_btn").active = true;
+                        }else{
+                            item.getChildByName("delete_btn").active = false;
+                        }
+                    }
+                }else if(item != null){
+                    item.active = false;
+                }
+            }
+            this.memberInviteNode.setParent(this.memberContentNode);
+        }
+
+        if(this.m_isCreator){
+            this.dissolveOrExitBtn.getChildByName("Label").getComponent(cc.Label).string = "解散群";
+        }else{
+            this.dissolveOrExitBtn.getChildByName("Label").getComponent(cc.Label).string = "退出群";
+        }
+    },
+
+    onBackBtnClick(btn){
+        GameManager.getInstance().LoadScene("main");
+    },
+
+    onInviteMemberClick(btn){
+        var familyInfo = GameManager.getInstance().familyInfo;
+        
+        if(familyInfo == null || familyInfo.info == null){
+            return;
+        }
+
+        //share
+        WXTool.getInstance().shareToJoinFamily(familyInfo.info.id, familyInfo.info.name, GameManager.getInstance().myInfo.wxName, function(){
+            PopupTipsNode.appearWithText("邀请成功");
+        },function(){
+            GameManager.getInstance().lauchOption=null;
+        });
+    },
+
+    onRemoveMemberClick(event){
+        if(!this.m_isCreator){
+            return;
+        }
+        var openId = event.target.parent.name;
+        var _this = this;
+        GameManager.getInstance().Family_RemoveMember(openId, function(resp){
+            _this.updateInfo(resp);
+        });
+    },
+
+    ////////////////////////// 改名字 /////////////////////////
+    onShowModifyNameBtnClick(btn){
+        if(!this.m_isCreator){
+            PopupTipsNode.appearWithText("不是创建者不能改名");
+            return;
+        }
+        this.modifyNameNode.getComponent(cc.Animation).play("group_modifyName");
+        this.modifyNameNode.active = true;
+    },
+
+    onCloseModifyNameBtnClick(btn){
+        this.modifyNameNode.active = false;
+    },
+
+    onModifyNameBtnClick(btn){
+        var name = cc.find("panel/eb_name", this.modifyNameNode).getComponent(cc.EditBox).string;
+        
+        if(name.length == 0){
+            PopupTipsNode.appearWithText("名字不能为空");
+            return;
+        }
+        this.onCloseModifyNameBtnClick();
+
+        var _this = this;
+        GameManager.getInstance().Family_ModifyName(name, function(resp){
+            _this.nameLb.string = name;
+        });
+    },
+
+    ////////////////////////// 说明 /////////////////////////
+    onShowTipsBtnClick(btn){
+        this.tipsNode.active = true;
+    },
+
+    onCloseTipsBtnClick(btn){
+        this.tipsNode.active = false;
+    },
+    
+    ////////////////////////// 退出群或解散群 /////////////////////////
+    onShowDissolveOrExitBtnClick(btn){
+        this.dissolveOrExitNode.active = true;
+
+        var contentLb = this.dissolveOrExitNode.getChildByName("lb_content").getComponent(cc.Label);
+        if(this.m_isCreator){
+            contentLb.string = "真的要解散群吗？";
+        }else{
+            contentLb.string = "真的要退出群吗？";
+        }
+    },
+
+    onCloseDissolveOrExitBtnClick(btn){
+        this.dissolveOrExitNode.active = false;
+    },
+
+    onDissolveOrExitBtnClick(btn){
+        var _this = this;
+        if(this.m_isCreator){
+            GameManager.getInstance().Family_Dissolve(function(resp){
+                _this.onBackBtnClick();
+                PopupTipsNode.appearWithText("解散成功");
+            });
+        }else{
+            GameManager.getInstance().Family_Exit(function(resp){
+                _this.onBackBtnClick();
+                PopupTipsNode.appearWithText("退出成功");
+            });
+        }
+    }
+});

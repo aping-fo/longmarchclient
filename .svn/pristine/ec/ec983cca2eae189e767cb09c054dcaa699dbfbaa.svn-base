@@ -1,0 +1,24 @@
+"use strict";
+cc._RF.push(module, '843c21VE8hIkrAjGjyfal6+', 'PopupWindow');
+// scripts/widget/PopupWindow.js
+
+"use strict";
+
+var UIHelper = require("UIHelper");
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {},
+
+    start: function start() {},
+    onEnable: function onEnable() {
+        //在canvas的最后一层
+        UIHelper.SetLastSiblingIndex(this.node, cc.Canvas.instance.node);
+    },
+    onAnimationEnd: function onAnimationEnd() {
+        this.node.active = false;
+    }
+});
+
+cc._RF.pop();

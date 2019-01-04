@@ -1,0 +1,1 @@
+{"version":3,"sources":["CallbackComponent.js"],"names":["cc","Class","extends","Component"],"mappings":";;;;;;AAAAA,GAAGC,KAAH,CAAS;AACLC,aAASF,GAAGG;AADP,CAAT","file":"CallbackComponent.js","sourceRoot":"..\\..\\..\\..\\..\\assets\\scripts\\widget","sourcesContent":["cc.Class({\r\n    extends: cc.Component,\r\n});"]}

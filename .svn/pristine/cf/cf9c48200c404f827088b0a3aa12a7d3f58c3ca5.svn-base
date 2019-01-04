@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "b875315f-7ec6-4991-b221-9ef4fd2903b0",
+  "atlasJson": "{\"width\":1024,\"SubTexture\":[{\"width\":300,\"y\":669,\"height\":212,\"name\":\"monster/1\",\"x\":330},{\"width\":358,\"y\":1,\"height\":666,\"name\":\"monster/5\",\"x\":1},{\"width\":327,\"y\":669,\"height\":209,\"name\":\"monster/6\",\"x\":1}],\"height\":1024,\"name\":\"NewProject_2\",\"imagePath\":\"NewProject_2_tex.png\"}",
+  "texture": "7696ffe9-ea69-4917-a11b-fe9b0e3b4cea",
+  "subMetas": {}
+}

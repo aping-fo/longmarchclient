@@ -1,0 +1,70 @@
+var speed=100;
+var isPlaying=false;
+/**
+跑马灯组件
+*/
+cc.Class({
+    extends: cc.Component,
+    properties: {
+        mask: {
+            default: null,
+            type: cc.Node,
+            displayName: '遮罩'
+        },
+    
+        label: {
+            default: null,
+            type: cc.Label,
+            displayName: '文本'
+        },
+    
+        text: {
+            default: [],
+    
+            type: [cc.String],
+        }
+    },
+    
+    // LIFE-CYCLE CALLBACKS:
+    
+    onLoad() {
+    
+        this.node.active=false;
+    },
+    play(text,callback)
+    {
+        if(isPlaying)
+        {
+            return;
+        }
+        var anim = this.node.getComponent(cc.Animation);
+        anim.play();
+        isPlaying=true;
+        this.node.active=true;
+        this.node.opacity=0;
+        var fadeIn=cc.fadeIn(.2,255);
+        this.node.runAction(fadeIn);
+        this.label.string=text;
+        var fromPos=this.mask.width/2+this.label.node.width*2/3;
+        var toPos=-(this.mask.width/2+this.label.node.width*2/3);
+        var dst=fromPos-toPos;
+        var t=dst/speed;
+        this.label.node.setPosition(fromPos,0);
+        
+        var self=this;
+        var move=cc.sequence(cc.moveTo(t,cc.v2(toPos,0)),cc.callFunc(function(){
+            var fadeOut=cc.sequence(cc.fadeOut(.2,0),cc.callFunc(function(){
+                isPlaying=false;
+                self.node.active=false;
+                if(callback != null)
+                {
+                    callback();
+                }
+            })); 
+            self.node.runAction(fadeOut);
+        }));
+        this.label.node.runAction(move)
+       
+    }
+    
+    });

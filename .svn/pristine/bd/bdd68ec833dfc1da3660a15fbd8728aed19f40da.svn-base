@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "invite",
+    "texture": "b6b7db72-a7a6-433c-a1b5-331fb1f15d0b",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      542,
+      691
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      542,
+      691
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,133 @@
+(function() {"use strict";var __module = CC_EDITOR ? module : {exports:{}};var __filename = 'preview-scripts/assets/scripts/BeginPanel.js';var __require = CC_EDITOR ? function (request) {return cc.require(request, require);} : function (request) {return cc.require(request, __filename);};function __define (exports, require, module) {"use strict";
+cc._RF.push(module, '5e7a7hij9dPIqFz5pAZiyz8', 'BeginPanel', __filename);
+// scripts/BeginPanel.js
+
+"use strict";
+
+/**
+ * 启动面板
+ * 
+ * 用户登录和授权面板
+ */
+var WXTool = require("WXTool");
+var GameManager = require("GameManager");
+var AudioManager = require("AudioManager");
+var httpReq = require('HttpReq');
+var Alert = require("Alert");
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+
+        progressBar: {
+            type: cc.ProgressBar,
+            default: null
+        }
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad: function onLoad() {
+        this.init();
+
+        cc.director.on("WXLoginSuccess", this.onWXLoginSuccess, this);
+        GameManager.getInstance().lauchOption = WXTool.getInstance().getLaunchOptionsSync(); //启动参数
+        console.log("lauchOption:", GameManager.getInstance().lauchOption);
+        WXTool.getInstance().wxOnShow(function (res) {
+            GameManager.getInstance().lauchOption = res;
+            if (res != null && res.query != null) {
+                var tips = '';
+                if (res.query.roomId != null) {
+                    tips = '是否接受邀请加入对战?';
+                } else if (res.query.familyId != null) {
+                    tips = '是否接受邀请加入家庭群?';
+                }
+                if (tips.length > 0) {
+                    Alert.show(tips, function () {
+                        cc.director.loadScene("main", function () {});
+                    }, function () {
+                        GameManager.getInstance().lauchOption = null;
+                    }, "", 0.3);
+                }
+            }
+        });
+    },
+    start: function start() {
+        this.progressBar.node.active = false;
+        WXTool.getInstance().login();
+    },
+    onDestroy: function onDestroy() {
+        cc.loader.onProgress = null;
+    },
+    init: function init() {
+        //按钮添加音效
+        var buttonTouchEnd = cc.Button.prototype._onTouchEnded;
+        cc.Button.prototype._onTouchEnded = function (t) {
+            buttonTouchEnd.call(this, t);
+            if (this.interactable && this.enabledInHierarchy) {
+                AudioManager.getInstance().playEffect(AudioManager.EFFECT_TYPE.BUTTON);
+            }
+        };
+    },
+
+
+    // update (dt) {},
+    onWXLoginSuccess: function onWXLoginSuccess() {
+        console.log("wx login success");
+        this.prepareResource();
+    },
+    prepareResource: function prepareResource() {
+        this.progressBar.node.active = true;
+        var code = WXTool.getInstance().getCode();
+        if (!WXTool.enable) {
+            // httpReq.openId=parseInt(Math.random()*999);
+            httpReq.openId = "123";
+        }
+        GameManager.getInstance().GetOpenId(code, function (resp) {
+            var openId = resp['openId'];
+            WXTool.getInstance().setOpenId(openId);
+            httpReq.openId = openId;
+            GameManager.getInstance().myInfo = {
+                wxName: WXTool.getInstance().getWxName(),
+                iconUrl: WXTool.getInstance().getAvatarUrl(),
+                openId: openId
+            };
+
+            if (resp['hasRole']) {
+                GameManager.getInstance().UpdateRole(GameManager.getInstance().myInfo['wxName'], GameManager.getInstance().myInfo['iconUrl'], function (resp) {
+                    if (resp.toString() == "ok") {
+                        GameManager.getInstance().PreLoadScene("game");
+                        GameManager.getInstance().LoadScene("main");
+                    }
+                });
+            } else {
+                GameManager.getInstance().CreateRole(GameManager.getInstance().myInfo['wxName'], GameManager.getInstance().myInfo['iconUrl'], function (resp) {
+                    if (resp.toString() == "ok") {
+                        GameManager.getInstance().PreLoadScene("game");
+                        GameManager.getInstance().LoadScene("main");
+                    }
+                });
+            }
+        });
+
+        var _this = this;
+        cc.loader.onProgress = function (curCount, totalCount, item) {
+            _this.progressBar.progress = curCount / totalCount;
+        };
+    }
+});
+
+cc._RF.pop();
+        }
+        if (CC_EDITOR) {
+            __define(__module.exports, __require, __module);
+        }
+        else {
+            cc.registerModuleFunc(__filename, function () {
+                __define(__module.exports, __require, __module);
+            });
+        }
+        })();
+        //# sourceMappingURL=BeginPanel.js.map
+        

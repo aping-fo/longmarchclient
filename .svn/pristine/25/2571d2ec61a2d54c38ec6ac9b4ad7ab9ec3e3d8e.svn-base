@@ -1,0 +1,235 @@
+const LOCALSTORAGEKEY_BgmOn = "BgmOn";
+const LOCALSTORAGEKEY_ClipOn = "ClipOn";
+
+var AudioManager = cc.Class({
+    extends: cc.Component,
+    statics: {
+        _instance: null,
+        getInstance: function () {
+            if (!AudioManager._instance) {
+                AudioManager._instance = new AudioManager();
+            }
+            return AudioManager._instance;
+        },
+
+        MUSIC_TYPE: cc.Enum({
+            NORMAL: 0,
+            FIGHT: 1
+        }),
+        
+        EFFECT_TYPE: cc.Enum({
+            BUTTON: 0,
+            POPUP: 1,
+            MONEY: 2,
+
+            FIRE: 10,
+            FAIL: 11,
+            SUCCESS: 12,
+            CHICKEN_GAME_START:13,
+            CHICKEN_GAME_START_GO:14
+        }),
+    },
+
+    init(){
+        this.m_effectIdMapping = [];
+
+        this.m_bgmOn = false;
+        this.m_clipOn = false;
+        this.m_bgMusic = null;
+        this.m_fightBgMusic = null;
+        this.m_playingMusic = null;
+
+        this.m_clickClip = null;
+        this.m_popupClip = null;
+        this.m_moneyClip = null;
+
+        var _this = this;
+
+        cc.loader.loadRes("music/bg", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_bgMusic = audioClip;
+            _this.playMusic(AudioManager.MUSIC_TYPE.FIGHT);
+        });
+
+        cc.loader.loadRes("music/bg1", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_fightBgMusic = audioClip;
+        });
+
+        cc.loader.loadRes("audio/popup", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_popupClip = audioClip;
+        });
+
+        cc.loader.loadRes("audio/button", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_clickClip = audioClip;
+        });
+        
+        cc.loader.loadRes("audio/money", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_moneyClip = audioClip;
+        });
+        
+        cc.loader.loadRes("audio/fire", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_fireClip = audioClip;
+        });
+        
+        cc.loader.loadRes("audio/fail", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_failClip = audioClip;
+        });
+        
+        cc.loader.loadRes("audio/success", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_successClip = audioClip;
+        });
+        cc.loader.loadRes("audio/Countdown", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_gameStartClip = audioClip;
+        });
+        cc.loader.loadRes("audio/Countdown2", cc.AudioClip, function (err, audioClip) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.m_gameStartClip2 = audioClip;
+        });
+        
+
+        //背景音乐
+        var bgmOn = cc.sys.localStorage.getItem(LOCALSTORAGEKEY_BgmOn) == null || cc.sys.localStorage.getItem(LOCALSTORAGEKEY_BgmOn) == "" ? true : cc.sys.localStorage.getItem(LOCALSTORAGEKEY_BgmOn) == "true" ? true : false;
+        this.setBgmOn(bgmOn);
+
+        //音效
+        var clipOn = cc.sys.localStorage.getItem(LOCALSTORAGEKEY_ClipOn) == null || cc.sys.localStorage.getItem(LOCALSTORAGEKEY_ClipOn) == "" ? true : cc.sys.localStorage.getItem(LOCALSTORAGEKEY_ClipOn) == "true" ? true : false;
+        this.setClipOn(clipOn);
+    },
+    
+    setBgmOn(isOn) {
+        this.m_bgmOn = isOn;
+        cc.sys.localStorage.setItem(LOCALSTORAGEKEY_BgmOn, isOn ? "true" : "false");
+
+        cc.audioEngine.setMusicVolume(isOn ? 1 : 0);
+    },
+
+    isBgmOn() {
+        return this.m_bgmOn;
+    },
+
+    setClipOn(isOn) {
+        this.m_clipOn = isOn;
+        cc.sys.localStorage.setItem(LOCALSTORAGEKEY_ClipOn, isOn ? "true" : "false");
+
+        cc.audioEngine.setEffectsVolume(isOn ? 1 : 0);
+    },
+
+    isClipOn() {
+        return this.m_clipOn;
+    },
+
+    playMusic(type, isLoop) {
+
+        if (isLoop == null) {
+            isLoop = true;
+        }
+
+        var clip = null;
+
+        switch(type){
+            case AudioManager.MUSIC_TYPE.NORMAL:
+                clip = this.m_bgMusic;
+                break;
+
+            case AudioManager.MUSIC_TYPE.FIGHT:
+                clip = this.m_fightBgMusic;
+                break;
+        }
+
+        if(this.m_playingMusic == clip){
+            return;
+        }
+
+        cc.audioEngine.playMusic(clip, isLoop);
+        this.m_playingMusic = clip;
+    },
+
+    playEffect(type) {
+        var clip = null;
+
+        switch(type){
+            case AudioManager.EFFECT_TYPE.BUTTON:
+                clip = this.m_clickClip;
+                break;
+
+            case AudioManager.EFFECT_TYPE.POPUP:
+                clip = this.m_popupClip;
+                break;
+
+            case AudioManager.EFFECT_TYPE.MONEY:
+                clip = this.m_moneyClip;
+                break;
+
+            case AudioManager.EFFECT_TYPE.FIRE:
+                clip = this.m_fireClip;
+                break;
+
+                
+            case AudioManager.EFFECT_TYPE.FAIL:
+                clip = this.m_failClip;
+            break;
+
+            case AudioManager.EFFECT_TYPE.SUCCESS:
+                clip = this.m_successClip;
+                break;
+
+            case AudioManager.EFFECT_TYPE.CHICKEN_GAME_START:
+                clip = this.m_gameStartClip;
+                break;
+
+            case AudioManager.EFFECT_TYPE.CHICKEN_GAME_START_GO:
+                clip = this.m_gameStartClip2;
+                break;
+        }
+
+        let id = cc.audioEngine.playEffect(clip);
+        this.m_effectIdMapping[type] = id;
+    },
+
+    stopEffect(type){
+        if(this.m_effectIdMapping[type] == null){
+            return;
+        }
+
+        cc.audioEngine.stopEffect(this.m_effectIdMapping[type]);
+        this.m_effectIdMapping[type] = null;
+    }
+});

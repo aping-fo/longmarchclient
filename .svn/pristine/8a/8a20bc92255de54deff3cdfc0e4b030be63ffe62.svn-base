@@ -1,0 +1,59 @@
+(function() {"use strict";var __module = CC_EDITOR ? module : {exports:{}};var __filename = 'preview-scripts/assets/scripts/RankPanel.js';var __require = CC_EDITOR ? function (request) {return cc.require(request, require);} : function (request) {return cc.require(request, __filename);};function __define (exports, require, module) {"use strict";
+cc._RF.push(module, '1a5cbdx/GVK67Kzv5vrgHmQ', 'RankPanel', __filename);
+// scripts/RankPanel.js
+
+"use strict";
+
+var GameManager = require("GameManager");
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+
+        toggleContainer: {
+            type: cc.ToggleContainer,
+            default: null
+        }
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad: function onLoad() {
+        for (var i = 0; i < this.toggleContainer.toggleItems.length; i++) {
+            this.toggleContainer.toggleItems[i].node.on("toggle", this.onToggleClick, this);
+        }
+    },
+    start: function start() {
+        this.m_globalPageIndex = 0;
+        this.m_globalCount = 50;
+
+        this.onToggleClick(this.toggleContainer.toggleItems[0]);
+        this.toggleContainer.toggleItems[0].check();
+    },
+    update: function update(dt) {},
+    onToggleClick: function onToggleClick(toggle) {
+        if (toggle.node.name == "friend_Toggle") {
+            GameManager.getInstance().OpenFriendRank();
+        } else if (toggle.node.name == "world_Toggle") {
+            GameManager.getInstance().OpenPlayerRank(this.m_globalPageIndex, this.m_globalCount);
+        }
+    },
+    onBackBtnClick: function onBackBtnClick(btn) {
+        cc.director.loadScene("main");
+    }
+});
+
+cc._RF.pop();
+        }
+        if (CC_EDITOR) {
+            __define(__module.exports, __require, __module);
+        }
+        else {
+            cc.registerModuleFunc(__filename, function () {
+                __define(__module.exports, __require, __module);
+            });
+        }
+        })();
+        //# sourceMappingURL=RankPanel.js.map
+        

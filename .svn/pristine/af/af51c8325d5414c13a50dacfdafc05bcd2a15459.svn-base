@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<items>
+  <config>
+	<item client="MapCfg" server="MapCfg" file="d地图信息" /> 
+	<item client="MallCfg" server="MallCfg" file="m商城" />
+  </config>
+</items>

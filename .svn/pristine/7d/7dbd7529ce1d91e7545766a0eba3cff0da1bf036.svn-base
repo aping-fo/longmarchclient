@@ -1,0 +1,23 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "fireball.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "fire_1": {
+      "__uuid__": "362eb6d3-edee-47fc-ada9-943490d197e1"
+    },
+    "fire_2": {
+      "__uuid__": "f945ad89-1cde-4ee9-8aa2-c638cf67b7ae"
+    },
+    "fire_3": {
+      "__uuid__": "42102d84-05f5-4e97-9999-53f9f936ba1b"
+    },
+    "fire_4": {
+      "__uuid__": "55968dac-9e47-4e1c-82cd-9b7716300807"
+    },
+    "fire_5": {
+      "__uuid__": "a256bce0-7f90-4cdb-b6c7-0b634c40e0eb"
+    }
+  }
+}

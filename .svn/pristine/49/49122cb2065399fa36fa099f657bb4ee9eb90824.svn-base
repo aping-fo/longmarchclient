@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "wood",
+    "texture": "0d56cbd9-be87-474e-baad-6963bef7b338",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      750,
+      35
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      750,
+      35
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

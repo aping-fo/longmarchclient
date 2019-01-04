@@ -1,0 +1,73 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "CheseAppear",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.4166666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "2cb020c4-fed0-4d56-863b-1ea9bdfcf9f6"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "03a7f564-6542-4f1b-a505-5d7b21a0fa4e"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "a81c6776-1f40-48dd-ba95-c5033296be69"
+            }
+          },
+          {
+            "frame": 0.15,
+            "value": {
+              "__uuid__": "cd118359-b74e-4097-8e92-b36f1836323d"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "acdae3c9-68bf-411e-84a9-bc5666417670"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "56b7aadd-ed09-4403-8801-7fd3ddf760b6"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "c82d4002-8e98-456d-a26f-5fe515ff849d"
+            }
+          },
+          {
+            "frame": 0.35,
+            "value": {
+              "__uuid__": "5191e405-e32d-4393-a577-65250eba95a2"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "92fdc7d0-749c-4851-975a-af8921000f33"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

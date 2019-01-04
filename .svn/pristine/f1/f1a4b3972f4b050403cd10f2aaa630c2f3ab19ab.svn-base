@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "clip",
+    "texture": "c4af32bd-0c62-4084-962f-87d9a11e8e04",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      44,
+      70
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      44,
+      70
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

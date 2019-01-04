@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Silk",
+    "texture": "5d25df7a-fa9e-4937-9ad7-877dc82651b2",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      200,
+      56
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      200,
+      56
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

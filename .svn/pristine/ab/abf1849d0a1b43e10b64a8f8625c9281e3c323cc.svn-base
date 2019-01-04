@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "winAnim_2",
+    "texture": "53311b0f-563c-41b4-9c5b-599770b057f1",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      511,
+      120
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      511,
+      120
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

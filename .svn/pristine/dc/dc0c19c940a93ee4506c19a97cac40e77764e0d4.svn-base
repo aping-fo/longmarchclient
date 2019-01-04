@@ -1,0 +1,345 @@
+2018-12-12T07:50:09.232Z - normal: Load ~/.CocosCreator/settings.json
+2018-12-12T07:50:10.366Z - normal: Initializing Asset Database
+2018-12-12T07:50:10.385Z - normal: checking language setting...
+2018-12-12T07:50:10.385Z - normal: Language: zh
+2018-12-12T07:50:11.006Z - success: preview server running at http://localhost:7456
+2018-12-12T07:50:11.008Z - success: protocol editor-framework registered
+2018-12-12T07:50:11.008Z - success: protocol app registered
+2018-12-12T07:50:11.008Z - success: protocol theme registered
+2018-12-12T07:50:11.008Z - success: protocol packages registered
+2018-12-12T07:50:11.009Z - success: protocol uuid registerred
+2018-12-12T07:50:11.009Z - success: protocol db registerred
+2018-12-12T07:50:11.009Z - success: protocol thumbnail registerred
+2018-12-12T07:50:11.009Z - success: protocol unpack registerred
+2018-12-12T07:50:11.009Z - success: protocol disable-commonjs registerred
+2018-12-12T07:50:11.229Z - normal: connected!
+2018-12-12T07:50:11.230Z - normal: Check project E:\workspace\wechat_game\wechat_game_longmarch\longmarch
+2018-12-12T07:50:11.231Z - normal: Initializing project E:\workspace\wechat_game\wechat_game_longmarch\longmarch
+2018-12-12T07:50:11.790Z - normal: Initializing Cocos2d
+2018-12-12T07:50:12.418Z - normal: Initializing engine extends
+2018-12-12T07:50:12.420Z - normal: Loading editor/builtin packages from D:\CocosCreator_2.1\resources\app.asar\editor\builtin
+2018-12-12T07:50:12.425Z - normal: Loading builtin packages from D:\CocosCreator_2.1\resources\builtin
+2018-12-12T07:50:12.929Z - success: assets loaded
+2018-12-12T07:50:12.929Z - success: asset-db-debugger loaded
+2018-12-12T07:50:12.979Z - success: builder loaded
+2018-12-12T07:50:12.980Z - success: code-editor loaded
+2018-12-12T07:50:13.024Z - success: cocos-analytics loaded
+2018-12-12T07:50:13.024Z - success: color-picker loaded
+2018-12-12T07:50:13.103Z - success: console loaded
+2018-12-12T07:50:13.103Z - success: google-play-instant loaded
+2018-12-12T07:50:13.133Z - success: fb-instant-games loaded
+2018-12-12T07:50:13.133Z - success: jsb-adapter loaded
+2018-12-12T07:50:13.139Z - success: google-instant-games loaded
+2018-12-12T07:50:13.140Z - success: oppo-runtime loaded
+2018-12-12T07:50:13.390Z - success: hierarchy loaded
+2018-12-12T07:50:13.390Z - success: package-manager loaded
+2018-12-12T07:50:13.499Z - success: inspector loaded
+2018-12-12T07:50:13.500Z - success: qqplay-adapter loaded
+2018-12-12T07:50:13.503Z - success: keystore loaded
+2018-12-12T07:50:13.504Z - success: sdkbox loaded
+2018-12-12T07:50:13.509Z - success: node-library loaded
+2018-12-12T07:50:13.509Z - success: tester loaded
+2018-12-12T07:50:13.513Z - success: package-asset loaded
+2018-12-12T07:50:13.514Z - success: ui-grid loaded
+2018-12-12T07:50:13.517Z - success: preferences loaded
+2018-12-12T07:50:13.517Z - success: ui-kit-preview-extra loaded
+2018-12-12T07:50:13.520Z - success: project-exporter loaded
+2018-12-12T07:50:13.520Z - success: ui-kit-preview loaded
+2018-12-12T07:50:13.538Z - success: project-importer loaded
+2018-12-12T07:50:13.538Z - success: ui-kit loaded
+2018-12-12T07:50:13.541Z - success: project-settings loaded
+2018-12-12T07:50:13.542Z - success: ui-tree loaded
+2018-12-12T07:50:13.547Z - success: scene loaded
+2018-12-12T07:50:13.548Z - success: vivo-runtime loaded
+2018-12-12T07:50:13.549Z - success: simulator-debugger loaded
+2018-12-12T07:50:13.550Z - success: weapp-adapter loaded
+2018-12-12T07:50:13.556Z - success: sprite-editor loaded
+2018-12-12T07:50:13.561Z - success: store loaded
+2018-12-12T07:50:13.564Z - success: timeline loaded
+2018-12-12T07:50:13.751Z - normal: Loading packages
+2018-12-12T07:50:13.761Z - success: behaviortree-editor loaded
+2018-12-12T07:50:13.763Z - success: build-with-alading loaded
+2018-12-12T07:50:13.765Z - success: excel-killer loaded
+2018-12-12T07:50:13.766Z - normal: Watching packages
+2018-12-12T07:50:14.110Z - normal: Run Application
+2018-12-12T08:09:18.482Z - warn: 'cc.Node.rotation' is deprecated, please use 'cc.Node.angle' instead.
+2018-12-12T08:09:18.487Z - warn: 'cc.Node.rotationX' is deprecated, please use 'cc.Node.eulerAngles' instead.
+2018-12-12T08:09:18.488Z - warn: 'cc.Node.rotationY' is deprecated, please use 'cc.Node.eulerAngles' instead.
+2018-12-12T08:09:18.489Z - warn: 'cc.Node.rotation' is deprecated, please use 'cc.Node.angle' instead.
+2018-12-12T08:09:18.489Z - warn: 'cc.Node.rotationX' is deprecated, please use 'cc.Node.eulerAngles' instead.
+2018-12-12T08:09:18.489Z - warn: 'cc.Node.rotationY' is deprecated, please use 'cc.Node.eulerAngles' instead.
+2018-12-12T08:24:10.268Z - failed: load script [SelfTestModel] failed : Error: Cannot find module 'SelfTestModel'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:1:354
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:13:21)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:612:13
+2018-12-12T08:24:10.368Z - failed: load script [ChessBoard] failed : Error: Cannot find module 'ChessBoard'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:1:359
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:8:18)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:403:13
+2018-12-12T08:24:10.371Z - failed: load script [chessAni] failed : Error: Cannot find module 'chessAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:1:359
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:16:16)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:403:13
+2018-12-12T08:24:10.372Z - failed: load script [excerciseAni] failed : Error: Cannot find module 'excerciseAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:1:359
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:17:20)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:403:13
+2018-12-12T08:24:10.372Z - failed: load script [rightOrWrongAni] failed : Error: Cannot find module 'rightOrWrongAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:1:359
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:20:21)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:403:13
+2018-12-12T08:24:10.372Z - failed: load script [resultAni] failed : Error: Cannot find module 'resultAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:1:359
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:22:17)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\CompetitionPanel.js:403:13
+2018-12-12T08:24:10.372Z - warn: The 'type' attribute of 'CompetitionPanel.chessBoard' is undefined when loading script
+2018-12-12T08:24:10.373Z - failed: load script [SelfTestModel] failed : Error: Cannot find module 'SelfTestModel'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\ExamOnlyPanel.js:1:356
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\ExamOnlyPanel.js:9:21)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\ExamOnlyPanel.js:151:13
+2018-12-12T08:24:10.373Z - failed: load script [excerciseAni] failed : Error: Cannot find module 'excerciseAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\ExamOnlyPanel.js:1:356
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\ExamOnlyPanel.js:10:20)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\ExamOnlyPanel.js:151:13
+2018-12-12T08:24:10.373Z - failed: load script [excerciseAni] failed : Error: Cannot find module 'excerciseAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:1:350
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:7:20)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:173:13
+2018-12-12T08:24:10.373Z - failed: load script [chessAni] failed : Error: Cannot find module 'chessAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:1:350
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:8:16)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:173:13
+2018-12-12T08:24:36.721Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/tools/ImageLoader.js.meta
+2018-12-12T08:28:20.730Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/CompetitionPanel.js.meta
+2018-12-12T08:28:20.757Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/ExamOnlyPanel.js.meta
+2018-12-12T08:28:20.771Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/ExcercisesBoard.js.meta
+2018-12-12T08:28:20.784Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/FaceBoard.js.meta
+2018-12-12T08:28:20.797Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/JumpTest.js.meta
+2018-12-12T08:28:20.810Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/LampText.js.meta
+2018-12-12T08:28:20.825Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/MasterMatchPanel.js.meta
+2018-12-12T08:28:20.839Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/MatchingBoard.js.meta
+2018-12-12T08:28:20.853Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/MatchingPanel.js.meta
+2018-12-12T08:28:20.867Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/PlayerBoard.js.meta
+2018-12-12T08:28:20.880Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/PlayerInfoPanel.js.meta
+2018-12-12T08:28:20.894Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/ResultPanel.js.meta
+2018-12-12T08:28:20.906Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/ReviewNode.js.meta
+2018-12-12T08:28:20.919Z - warn: [db-task][sync-changes] Backup unused meta file: db://assets/scripts/WinOrWrongPanel.js.meta
+2018-12-12T08:29:16.191Z - failed: load script [SelfTestModel] failed : Error: Cannot find module 'SelfTestModel'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:1:354
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:13:21)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:610:13
+2018-12-12T08:29:16.204Z - failed: load script [LampText] failed : Error: Cannot find module 'LampText'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:1:352
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:26:16)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:344:13
+2018-12-12T08:29:16.204Z - warn: The 'type' attribute of 'MainPanel.lampText' is undefined when loading script
+2018-12-12T08:29:16.207Z - failed: load script [excerciseAni] failed : Error: Cannot find module 'excerciseAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:1:350
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:7:20)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:173:13
+2018-12-12T08:29:16.207Z - failed: load script [chessAni] failed : Error: Cannot find module 'chessAni'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:1:350
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:8:16)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:173:13
+2018-12-12T08:29:16.208Z - failed: load script [ReviewNode] failed : Error: Cannot find module 'ReviewNode'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:1:350
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:10:18)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\aniTest.js:173:13
+2018-12-12T08:29:31.892Z - error: TypeError: Cannot read property 'name' of undefined
+    at mnodes.t.map.e (D:\CocosCreator_2.1\resources\app.asar\editor\builtin\timeline\panel\component\home.js:1:3673)
+    at Array.map (native)
+    at Vue.updateMNodes (D:\CocosCreator_2.1\resources\app.asar\editor\builtin\timeline\panel\component\home.js:1:3646)
+    at Vue.updateMNodes (app://node_modules/vue/dist/vue.js:220:72)
+    at Vue.clip (D:\CocosCreator_2.1\resources\app.asar\editor\builtin\timeline\panel\component\home.js:1:751)
+    at Watcher.run (app://node_modules/vue/dist/vue.js:3459:17)
+    at runBatcherQueue (app://node_modules/vue/dist/vue.js:3190:13)
+    at Array.flushBatcherQueue (app://node_modules/vue/dist/vue.js:3161:5)
+    at nextTickHandler (app://node_modules/vue/dist/vue.js:451:16)
+    at <anonymous>
+2018-12-12T08:29:43.830Z - warn: Script attached to "PlayerInfoPanel" in prefab "PlayerInfoPanel.prefab" is missing or invalid. Detailed information:
+Node path: "PlayerInfoPanel"
+Asset url: "db://assets/resources/prefabs/PlayerInfoPanel.prefab"
+Script UUID: "7e7cb4f8-9e90-469a-9cb3-82d2db3c53b9"
+Class ID: "7e7cbT4npBGmpyzgtLbPFO5"
+
+2018-12-12T08:29:43.917Z - warn: Script attached to "PlayerInfoPanel" in prefab "PlayerInfoPanel.prefab" is missing or invalid. Detailed information:
+Node path: "PlayerInfoPanel"
+Asset url: "db://assets/resources/prefabs/PlayerInfoPanel.prefab"
+Script UUID: "7e7cb4f8-9e90-469a-9cb3-82d2db3c53b9"
+Class ID: "7e7cbT4npBGmpyzgtLbPFO5"
+
+2018-12-12T08:29:58.996Z - warn: Script attached to "chess" in prefab "chess.prefab" is missing or invalid. Detailed information:
+Node path: "chess"
+Asset url: "db://assets/resources/prefabs/chess.prefab"
+Script UUID: "08665548-c5f5-47fd-914c-88ff1c0c854d"
+Class ID: "08665VIxfVH/ZFMiP8cDIVN"
+
+2018-12-12T08:29:59.070Z - warn: Script attached to "chess" in prefab "chess.prefab" is missing or invalid. Detailed information:
+Node path: "chess"
+Asset url: "db://assets/resources/prefabs/chess.prefab"
+Script UUID: "08665548-c5f5-47fd-914c-88ff1c0c854d"
+Class ID: "08665VIxfVH/ZFMiP8cDIVN"
+
+2018-12-12T08:31:11.424Z - failed: load script [SelfTestModel] failed : Error: Cannot find module 'SelfTestModel'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:1:354
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:13:21)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:588:13
+2018-12-12T08:31:11.621Z - failed: load script [LampText] failed : Error: Cannot find module 'LampText'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:1:352
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:26:16)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:344:13
+2018-12-12T08:31:11.621Z - warn: The 'type' attribute of 'MainPanel.lampText' is undefined when loading script
+2018-12-12T08:31:11.753Z - warn: The Asset used by node "bg" is missing. Detailed information:
+Node path: "loadingAni/bg"
+Missing uuid: "4de56bc3-ab6d-4359-adec-928a2128ec64"
+
+2018-12-12T08:31:11.754Z - warn: The Asset used by node "lbl" is missing. Detailed information:
+Node path: "loadingAni/lbl"
+Missing uuid: "4de56bc3-ab6d-4359-adec-928a2128ec64"
+
+2018-12-12T08:31:11.754Z - warn: The Asset used by node "loadingAni" is missing. Detailed information:
+Node path: "loadingAni"
+Missing uuid: "4de56bc3-ab6d-4359-adec-928a2128ec64"
+
+2018-12-12T08:31:49.618Z - failed: load script [SelfTestModel] failed : Error: Cannot find module 'SelfTestModel'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:1:354
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:13:21)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\GameManager.js:588:13
+2018-12-12T08:31:49.662Z - failed: load script [LampText] failed : Error: Cannot find module 'LampText'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (D:\CocosCreator_2.1\resources\electron.asar\common\reset-search-paths.js:35:12)
+    at Function.s._resolveFilename (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:941)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (D:\CocosCreator_2.1\resources\app.asar\editor\page\project-scripts.js:1:589)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:1:352
+    at __define (E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:26:16)
+    at E:\workspace\wechat_game\wechat_game_longmarch\longmarch\temp\quick-scripts\assets\scripts\MainPanel.js:344:13
+2018-12-12T08:31:49.662Z - warn: The 'type' attribute of 'MainPanel.lampText' is undefined when loading script

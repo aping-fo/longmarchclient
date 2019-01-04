@@ -1,0 +1,11 @@
+"use strict";
+cc._RF.push(module, '89d23It6klPM44dcWD6uuq/', 'CallbackComponent');
+// scripts/widget/CallbackComponent.js
+
+"use strict";
+
+cc.Class({
+    extends: cc.Component
+});
+
+cc._RF.pop();

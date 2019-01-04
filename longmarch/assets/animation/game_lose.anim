@@ -1,0 +1,165 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "game_lose",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.25,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "win": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 10,
+              "curve": [
+                0.42,
+                0,
+                0.9801524390243902,
+                -0.009908536585365724
+              ]
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": 30
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 10
+            },
+            {
+              "frame": 0.5833333333333334,
+              "value": -10
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 0
+            }
+          ],
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                14,
+                523
+              ],
+              "curve": "linear"
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": [
+                15.1,
+                0
+              ]
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": [
+                15.9,
+                44.3
+              ]
+            },
+            {
+              "frame": 0.5833333333333334,
+              "value": [
+                14.8,
+                -0.7
+              ]
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": [
+                15.1,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "win1": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.65,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1.2
+              }
+            },
+            {
+              "frame": 0.75,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1.2,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      },
+      "lb_dislose": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.75,
+              "value": 0
+            },
+            {
+              "frame": 1.25,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "goon": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.8333333333333334,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 1
+              }
+            },
+            {
+              "frame": 1,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": -0.13333333333333333,
+      "func": "",
+      "params": []
+    }
+  ]
+}

@@ -1,0 +1,547 @@
+"use strict";
+cc._RF.push(module, 'ed3116pp1NOUoIO95OmMWrB', 'WXTool');
+// scripts/WXTool.js
+
+"use strict";
+
+/**
+ * 微信工具
+ */
+var enable = false; //微信是否开启。方便本地调试
+var AdUnitID = "adunit-1f9bfa04c0bd5e7f";
+var ShareImages = ["resources/shareImg/share.png"];
+
+var Const = {
+    OpenDataKey_Score: "totalScore",
+
+    StorageKey_NewPlayer: "newPlayer"
+};
+
+var WXTool = cc.Class({
+    statics: {
+        instance: null,
+        getInstance: function getInstance() {
+            return this.instance || (this.instance = new WXTool()), this.instance;
+        },
+        enable: enable
+    },
+
+    ctor: function ctor() {
+        this.m_isLogin = false;
+        this.m_loginBtn = null;
+
+        this.m_advertiseVideo = null;
+        this.advertiseVideoReady = false;
+
+        this.initShare();
+    },
+    reset: function reset() {
+        this.m_isLogin = false;
+        this.m_loginBtn = null;
+    },
+
+
+    //登陆
+    login: function login() {
+        if (this.m_isLogin) {
+            return;
+        }
+
+        if (!enable) {
+            this.setOpenId();
+            this.getUserInfo();
+            return;
+        }
+        var _this = this;
+
+        wx.login({
+            success: function success(res) {
+                console.log("login success");
+                console.log(res['code']);
+                _this.setCode(res['code']);
+
+                //获取用户授权
+                wx.getSetting({
+                    success: function success(res) {
+                        var authSetting = res.authSetting;
+                        var userInfoSetting = authSetting['scope.userInfo'];
+                        if (userInfoSetting === true) {
+                            //用户成功授权
+                            console.log("Request WX UserInfo Success");
+                            _this.getUserInfo();
+                        } else {
+                            if (userInfoSetting === false) {
+                                // 处理用户拒绝授权的情况
+                                console.log("Request WX UserInfo False");
+                            } else {
+                                console.log("Request WX UserInfo Ask");
+                            }
+
+                            //弹出询问框
+
+                            var _wx$getSystemInfoSync = wx.getSystemInfoSync(),
+                                screenWidth = _wx$getSystemInfoSync.screenWidth,
+                                screenHeight = _wx$getSystemInfoSync.screenHeight;
+
+                            console.log(screenWidth);
+                            console.log(screenHeight);
+                            var button = wx.createUserInfoButton({
+                                type: 'image',
+                                image: cc.loader.md5Pipe.transformURL(cc.url.raw("resources/startBtn.png")),
+                                style: {
+                                    left: (screenWidth - 125) / 2,
+                                    top: screenHeight - 60,
+                                    width: 125,
+                                    height: 54.5
+                                }
+                            });
+
+                            button.onTap(function (res) {
+                                _this.getUserInfo();
+                            });
+
+                            _this.m_loginBtn = button;
+                        }
+                    }
+                });
+            },
+            fail: function fail() {
+                console.log("login fail");
+            }
+        });
+    },
+
+
+    //获取Openid
+    setOpenId: function setOpenId(openId) {
+        this.m_openId = openId ? openId : "";
+
+        this.initRankInfo(this.m_openId);
+    },
+
+    //获取Openid
+    getOpenId: function getOpenId() {
+        return enable ? this.m_openId : parseInt(Math.random() * 99);
+    },
+
+    //登录code
+    setCode: function setCode(code) {
+        this.m_code = code;
+    },
+    getCode: function getCode() {
+        return enable ? this.m_code : "";
+    },
+
+    //获取用户头像和名字信息
+    getUserInfo: function getUserInfo() {
+        if (!enable) {
+            this.getUserInfoSuccess();
+            return;
+        }
+        var _this = this;
+        wx.getUserInfo({
+            success: function success(res) {
+                console.log("getUserInfo success");
+                console.log(res);
+                _this.getUserInfoSuccess(res);
+
+                if (_this.m_loginBtn != null) {
+                    _this.m_loginBtn.hide();
+                    _this.m_loginBtn = null;
+                }
+            },
+
+            fail: function fail(res) {
+                // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
+                if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1) {
+                    // 处理用户拒绝授权的情况
+                    console.log("Request WX UserInfo False");
+                }
+            }
+        });
+    },
+    getUserInfoSuccess: function getUserInfoSuccess(res) {
+        if (res) {
+            this.m_avatarUrl = res.userInfo.avatarUrl;
+            this.m_nickName = res.userInfo.nickName;
+        }
+
+        this.loginSuccess();
+    },
+    getWxName: function getWxName() {
+        return enable ? this.m_nickName : "测试";
+    },
+    getAvatarUrl: function getAvatarUrl() {
+        return enable ? this.m_avatarUrl : "";
+    },
+
+    //登陆成功
+    loginSuccess: function loginSuccess() {
+        this.m_isLogin = true;
+
+        this.initAdvertiseVideo();
+
+        cc.director.emit("WXLoginSuccess");
+    },
+
+
+    /**
+     * 分享
+     */
+    initShare: function initShare() {
+        if (!enable) {
+            return;
+        }
+
+        wx.updateShareMenu({
+            withShareTicket: true
+        });
+
+        wx.showShareMenu();
+    },
+
+
+    //分享指定图片
+    share: function share() {
+        if (!enable) {
+            return;
+        }
+
+        var rand = Math.floor(Math.random() * ShareImages.length);
+
+        wx.shareAppMessage({
+            title: '养生大师',
+            imageUrl: cc.loader.md5Pipe.transformURL(cc.url.raw(ShareImages[rand])),
+            success: function success(res) {
+                cc.director.emit("RecoverEnerge");
+            },
+
+            fail: function fail(res) {}
+        });
+    },
+
+    //邀请好友
+    shareToPlayTogether: function shareToPlayTogether(invitorName, roomId, callback, failCallBack) {
+        if (!enable) {
+            callback();
+            return;
+        }
+
+        var rand = Math.floor(Math.random() * ShareImages.length);
+        var text = invitorName + "邀请你加入挑战";
+        wx.shareAppMessage({
+            title: text,
+            imageUrl: cc.loader.md5Pipe.transformURL(cc.url.raw(ShareImages[rand])),
+            query: "roomId=" + roomId,
+            success: function success(res) {
+                callback();
+            },
+
+            fail: function fail(res) {
+                if (failCallBack != null) {
+                    failCallBack();
+                }
+            }
+        });
+    },
+
+
+    //邀请好友加入家庭群
+    shareToJoinFamily: function shareToJoinFamily(familyId, familyName, invitorName, callback, failCallBack) {
+        if (!enable) {
+            callback();
+            return;
+        }
+
+        var rand = Math.floor(Math.random() * ShareImages.length);
+        var text = invitorName + "邀请您加入家庭群：" + familyName;
+
+        wx.shareAppMessage({
+            title: text,
+            imageUrl: cc.loader.md5Pipe.transformURL(cc.url.raw(ShareImages[rand])),
+            query: "familyId=" + familyId + "&invitorName=" + invitorName,
+            success: function success(res) {
+                callback();
+            },
+
+            fail: function fail(res) {
+                if (failCallBack != null) {
+                    failCallBack();
+                }
+            }
+        });
+    },
+
+
+    //分享屏幕截图
+    shareWithImage: function shareWithImage() {
+        if (!enable) {
+            return;
+        }
+
+        wx.shareAppMessage({
+            title: '求婚101',
+            imageUrl: canvas.toTempFilePathSync({
+                destWidth: 500,
+                destHeight: 400
+            }),
+            success: function success(res) {
+                cc.director.emit("Reborn");
+            },
+
+            fail: function fail(res) {}
+        });
+    },
+
+
+    /**
+     * 广告
+     */
+    initAdvertiseVideo: function initAdvertiseVideo() {
+        if (!enable) {
+            return;
+        }
+
+        var advertiseVideo = wx.createRewardedVideoAd({ adUnitId: AdUnitID });
+        var _this = this;
+        advertiseVideo.onClose(function (res) {
+            // 用户点击了【关闭广告】按钮
+            // 小于 2.1.0 的基础库版本，res 是一个 undefined
+            if (res && res.isEnded || res === undefined) {
+                // 正常播放结束，可以下发游戏奖励
+                cc.director.emit("PlayAdvertiseVideoDone", true);
+            } else {
+                // 播放中途退出，不下发游戏奖励
+                cc.director.emit("PlayAdvertiseVideoDone", false);
+            }
+        });
+
+        advertiseVideo.onLoad(function () {
+            _this.advertiseVideoReady = true;
+        });
+
+        advertiseVideo.onError(function (err) {
+            console.log('load AdvertiseVideo Error', err);
+            _this.advertiseVideoReady = false;
+        });
+
+        this.m_advertiseVideo = advertiseVideo;
+    },
+    showAdvertiseVideo: function showAdvertiseVideo(successCallback, failCallback) {
+        var _this2 = this;
+
+        if (!enable) {
+            return;
+        }
+
+        var _this = this;
+        this.m_advertiseVideo.show().then(function () {
+            if (successCallback) {
+                successCallback();
+            }
+            _this.advertiseVideoReady = false;
+        }).catch(function (err) {
+            console.log('show AdvertiseVideo Error', err);
+            _this2.m_advertiseVideo.load().then(function () {
+                _this2.m_advertiseVideo.show();
+                if (successCallback) {
+                    successCallback();
+                }
+                _this.advertiseVideoReady = false;
+            }).catch(function (err) {
+                console.log('load AdvertiseVideo Error', err);
+                if (failCallback) {
+                    failCallback();
+                }
+            });
+        });
+    },
+
+
+    /**
+     * 排行榜
+     */
+    //初始化排行榜信息
+    initRankInfo: function initRankInfo(openId) {
+        if (!enable) {
+            return;
+        }
+
+        var openDataContext = wx.getOpenDataContext();
+        openDataContext.postMessage({ eventType: 1, openId: openId });
+    },
+
+
+    //切换好友排行
+    openFriendRank: function openFriendRank(myInfo) {
+        if (!enable) {
+            return;
+        }
+
+        var openDataContext = wx.getOpenDataContext();
+        openDataContext.postMessage({ eventType: 2, myInfo: myInfo });
+    },
+
+
+    //切换玩家排行
+    openPlayerRank: function openPlayerRank(data, from, myInfo) {
+        if (!enable) {
+            return;
+        }
+
+        var openDataContext = wx.getOpenDataContext();
+        openDataContext.postMessage({ eventType: 3, datas: { data: data, from: from }, myInfo: myInfo });
+    },
+
+
+    //打开超越好友分享面板
+    // openSharePanel(){
+    //     if(!enable){
+    //         return;
+    //     }
+
+    //     var openDataContext = wx.getOpenDataContext();
+    //     openDataContext.postMessage({eventType: 2});
+    // },
+
+    //上报分数
+    reportScore: function reportScore(score) {
+        if (!enable) {
+            return;
+        }
+        wx.setUserCloudStorage({
+            KVDataList: [{ key: Const.OpenDataKey_Score, value: score + '' }],
+            success: function success(res) {
+                console.log(res);
+            },
+            fail: function fail(res) {
+                console.log(res);
+            }
+        });
+    },
+
+
+    //获取卡片传入参数
+    getLaunchOptionsSync: function getLaunchOptionsSync() {
+        if (!enable) {
+            return null;
+        }
+        return wx.getLaunchOptionsSync();
+    },
+    wxOnShow: function wxOnShow(callback) {
+        if (enable) {
+            wx.onShow(function (res) {
+                callback(res);
+            });
+        }
+    },
+    ensureDirFor: function ensureDirFor(path, callback) {
+        // cc.log('mkdir:' + path);
+        if (!enable) {
+            return;
+        }
+
+        var _this = this;
+        var fs = wx.getFileSystemManager();
+        var ensureDir = cc.path.dirname(path);
+        if (ensureDir === "wxfile://usr" || ensureDir === "http://usr") {
+            callback();
+            return;
+        }
+        fs.access({
+            path: ensureDir,
+            success: callback,
+            fail: function fail(res) {
+                _this.ensureDirFor(ensureDir, function () {
+                    fs.mkdir({
+                        dirPath: ensureDir,
+                        complete: callback
+                    });
+                });
+            }
+        });
+    },
+    saveFileToLocal: function saveFileToLocal(fromPath, callback) {
+        if (!enable) {
+            return;
+        }
+
+        // var localPath = wx.env.USER_DATA_PATH + '/' + toPath;
+        var fs = wx.getFileSystemManager();
+        fs.saveFile({
+            tempFilePath: fromPath,
+            success: function success(res) {
+                if (callback) {
+                    callback("success", res.savedFilePath);
+                }
+            },
+
+            fail: function fail(res) {
+                console.log(res.errMsg);
+                if (callback) {
+                    callback("fail");
+                }
+            }
+        });
+        // this.ensureDirFor(localPath, function () {
+        //     fs.saveFile({
+        //         tempFilePath: fromPath, 
+        //         filePath: toPath,
+        //         success: function(res){
+        //             if(callback){
+        //                 callback("success", res.savedFilePath);
+        //             }
+        //         },
+
+        //         fail: function(res){
+        //             console.log(res.errMsg);
+        //             if(callback){
+        //                 callback("fail");
+        //             }
+        //         }
+        //     });
+        // });
+    },
+
+
+    //保存图片到相册
+    saveImageToAlbum: function saveImageToAlbum(path, callback) {
+        if (!enable) {
+            return;
+        }
+
+        new Promise(function (resolve, reject) {
+            wx.authorize({
+                scope: "scope.writePhotosAlbum",
+                success: function success() {
+                    resolve();
+                },
+
+                fail: function fail() {
+                    reject();
+                }
+            });
+        }).then(function () {
+            wx.saveImageToPhotosAlbum({
+                filePath: path,
+                success: function success() {
+                    if (callback) {
+                        callback("success");
+                    }
+                },
+
+                fail: function fail() {
+                    if (callback) {
+                        callback("fail");
+                    }
+                }
+            });
+        }).catch(function () {
+            if (callback) {
+                callback("fail");
+            }
+        });
+    }
+});
+
+cc._RF.pop();

@@ -1,0 +1,83 @@
+"use strict";
+cc._RF.push(module, '3360c5DWKJP/ImIHg/eZqw/', 'Monster');
+// scripts/Monster.js
+
+"use strict";
+
+var AudioManager = require("AudioManager");
+
+var t = 0;
+var side = 1;
+cc.Class({
+    extends: cc.Component,
+    properties: {
+        fireBall: {
+            default: null,
+            type: cc.Node,
+            serializable: true
+        }
+    },
+    onLoad: function onLoad() {
+        //获取 ArmatureDisplay
+        this._armatureDisPlay = this.getComponent(dragonBones.ArmatureDisplay);
+        this._armatureDisPlay.addEventListener(dragonBones.EventObject.COMPLETE, this.onAnimationComplete, this);
+        this._armatureDisPlay.addEventListener(dragonBones.EventObject.FRAME_EVENT, this.onFrameEvent, this);
+        //获取 Armatrue
+        this._armature = this._armatureDisPlay.armature();
+        //添加动画监听
+        this.fireBall.active = false;
+    },
+    start: function start() {
+        this.randomMove();
+    },
+    update: function update(dt) {
+        // t=t+dt*side;
+        // if(t>1.3)
+        // {
+        //     side=-1;
+        // }
+        // if(t<0.3)
+        // {
+        //     side=1;
+        // }
+        // this._armature.animation.gotoAndStopByTime('normal',t);
+    },
+    randomMove: function randomMove() {
+        var action = cc.repeatForever(cc.sequence(cc.delayTime(0.5 + Math.random() * 3), cc.moveTo(2, cc.v2(192, 300)), cc.delayTime(0.5 + Math.random() * 3), cc.moveTo(2, cc.v2(-192, 300))));
+        this.node.runAction(action);
+    },
+    moveSideToFire: function moveSideToFire(side) {
+        this.node.stopAllActions();
+        var _this = this;
+        var cb = cc.callFunc(function () {
+            _this.fire();
+        });
+        var action = cc.sequence(cc.moveTo(.5, cc.v2(side == 1 ? 192 : -192, 300)), cb);
+        this.node.runAction(action);
+    },
+    fire: function fire() {
+        this._armatureDisPlay.playAnimation("fire", 1);
+        this.fireBall.stopAllActions();
+        this.fireBall.active = true;
+        this.fireBall.setPosition(this.node.getPosition());
+        var _this = this;
+        var cb = cc.callFunc(function () {
+            _this.fireBall.active = false;
+            _this.randomMove();
+        });
+        var action = cc.sequence(cc.moveTo(3, cc.v2(this.fireBall.getPosition().x, -800)), cb);
+        this.fireBall.runAction(action);
+    },
+    onAnimationComplete: function onAnimationComplete(event) {
+        this._armatureDisPlay.playAnimation("normal", -1);
+    },
+    onFrameEvent: function onFrameEvent(event) {
+        if (event.name == "fireSoundBegin") {
+            AudioManager.getInstance().playEffect(AudioManager.EFFECT_TYPE.FIRE);
+        } else if (event.name == "fireSoundEnd") {
+            AudioManager.getInstance().stopEffect(AudioManager.EFFECT_TYPE.FIRE);
+        }
+    }
+});
+
+cc._RF.pop();

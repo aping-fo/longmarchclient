@@ -1,0 +1,17 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "excerciseAtlas.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "3": {
+      "__uuid__": "152ab7de-1188-4d1d-b73e-797d6aa91521"
+    },
+    "4": {
+      "__uuid__": "d53bba37-13ed-473a-95e8-8e394de65d04"
+    },
+    "5": {
+      "__uuid__": "3e8e5f1a-6c23-4205-805a-bd1eefeea5b9"
+    }
+  }
+}

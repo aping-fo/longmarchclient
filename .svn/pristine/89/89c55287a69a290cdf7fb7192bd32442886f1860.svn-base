@@ -1,0 +1,36 @@
+(function() {"use strict";var __module = CC_EDITOR ? module : {exports:{}};var __filename = 'preview-scripts/assets/scripts/widget/PopupWindow.js';var __require = CC_EDITOR ? function (request) {return cc.require(request, require);} : function (request) {return cc.require(request, __filename);};function __define (exports, require, module) {"use strict";
+cc._RF.push(module, '843c21VE8hIkrAjGjyfal6+', 'PopupWindow', __filename);
+// scripts/widget/PopupWindow.js
+
+"use strict";
+
+var UIHelper = require("UIHelper");
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {},
+
+    start: function start() {},
+    onEnable: function onEnable() {
+        //在canvas的最后一层
+        UIHelper.SetLastSiblingIndex(this.node, cc.Canvas.instance.node);
+    },
+    onAnimationEnd: function onAnimationEnd() {
+        this.node.active = false;
+    }
+});
+
+cc._RF.pop();
+        }
+        if (CC_EDITOR) {
+            __define(__module.exports, __require, __module);
+        }
+        else {
+            cc.registerModuleFunc(__filename, function () {
+                __define(__module.exports, __require, __module);
+            });
+        }
+        })();
+        //# sourceMappingURL=PopupWindow.js.map
+        

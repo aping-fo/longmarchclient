@@ -1,0 +1,41 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "PlayerInfo.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "1": {
+      "__uuid__": "0b76b9ac-3f8f-461c-9519-e799d33c3c7a"
+    },
+    "2": {
+      "__uuid__": "c06e8f73-110e-4ac5-9128-a6c17c946233"
+    },
+    "3": {
+      "__uuid__": "d654ed64-b73e-44ff-b06a-22a0594d5dfa"
+    },
+    "4": {
+      "__uuid__": "6b468f11-eede-45ea-9e80-efdc0145ce02"
+    },
+    "5": {
+      "__uuid__": "4b158f5a-f81b-4586-878a-ed6eff94e0f3"
+    },
+    "6": {
+      "__uuid__": "bdb27e5a-7bf4-4ba5-aebf-36b2d293f4f9"
+    },
+    "7": {
+      "__uuid__": "8426d3ff-f7bb-48b7-b46e-bcf02002d832"
+    },
+    "8": {
+      "__uuid__": "982e518f-d4a5-493f-8eec-4de32a7fa1b0"
+    },
+    "9": {
+      "__uuid__": "047ae325-ae22-40f9-bd8f-80750c094ce3"
+    },
+    "10": {
+      "__uuid__": "07296970-c96f-4663-969b-655a838d9213"
+    },
+    "11": {
+      "__uuid__": "3eedc2ab-3751-4581-8df2-14339d498210"
+    }
+  }
+}

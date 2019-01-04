@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "title_review",
+    "texture": "ad85dcf4-4e2c-4cb8-ac80-57cb3ea5acf0",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      66,
+      374
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      66,
+      374
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

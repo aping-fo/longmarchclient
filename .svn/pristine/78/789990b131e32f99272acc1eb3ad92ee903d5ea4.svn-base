@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "zhongfenshop",
+    "texture": "c9000a3e-e0af-47e9-b004-5c35255a0d65",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      573,
+      982
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      573,
+      982
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

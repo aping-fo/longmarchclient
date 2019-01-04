@@ -1,0 +1,20 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "chessAtlas.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "co": {
+      "__uuid__": "4166bc05-4f43-4b5c-9598-4335a7a67971"
+    },
+    "cx": {
+      "__uuid__": "1c63a598-d556-485c-9a14-3f4a2ae95303"
+    },
+    "o": {
+      "__uuid__": "9e9811bd-3d35-4110-83f3-baa68433a4f5"
+    },
+    "x": {
+      "__uuid__": "c4bea5bb-5bbd-4a3c-95ce-02317b6ee7ca"
+    }
+  }
+}

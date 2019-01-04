@@ -1,0 +1,61 @@
+"use strict";
+cc._RF.push(module, '0b0cbdbiKlKUYYcM+eRisG/', 'HistoryQuestionModel');
+// scripts/models/HistoryQuestionModel.js
+
+"use strict";
+
+/**
+ * 历史题目数据类
+ */
+
+var GameManager = require("GameManager");
+var _this = null;
+
+var HistoryQuestionModel = cc.Class({
+
+    statics: {
+        instance: null,
+        getInstance: function getInstance() {
+            return this.instance || (this.instance = new HistoryQuestionModel()), this.instance;
+        }
+    },
+
+    ctor: function ctor() {
+        _this = this;
+    },
+
+    properties: {
+        cacheCount: 5 //缓存数量
+    },
+
+    getDatas: function getDatas(callback) {
+        GameManager.getInstance().GetHistoryQuestions(function (resp) {
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+    getImageUrl: function getImageUrl() {
+        var str = GameManager.getInstance().getHistoryQuestionsUrl();
+        var urls = str.split(",");
+
+        return urls;
+    },
+    addImageUrl: function addImageUrl(url) {
+        if (url == null || url.length == 0) {
+            return;
+        }
+
+        var str = GameManager.getInstance().getHistoryQuestionsUrl();
+        var urls = str.split(",");
+
+        if (urls.length >= this.cacheCount) {
+            urls.shift();
+        }
+        urls.push(url);
+
+        GameManager.getInstance().setHistoryQuestionsUrl(urls.join(','));
+    }
+});
+
+cc._RF.pop();

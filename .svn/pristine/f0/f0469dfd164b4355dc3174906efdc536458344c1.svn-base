@@ -1,0 +1,26 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "category.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "fitting": {
+      "__uuid__": "e0f496c6-8015-4aab-aed0-9474ef94a982"
+    },
+    "food": {
+      "__uuid__": "96c1d813-0abf-4588-b33c-29ce2d3c7fec"
+    },
+    "lady": {
+      "__uuid__": "c0115cb6-4452-4e07-a4d5-c4b67cc7a7f9"
+    },
+    "sleep": {
+      "__uuid__": "d694389a-0296-499c-b170-ccdb2aa3d518"
+    },
+    "sport": {
+      "__uuid__": "8b1cf015-3366-40c7-ad74-a00b714335bd"
+    },
+    "yangsheng": {
+      "__uuid__": "c1d94d39-d337-4eff-bf07-3f743e13408d"
+    }
+  }
+}

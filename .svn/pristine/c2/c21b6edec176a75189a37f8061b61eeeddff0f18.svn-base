@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "xingxiang1_tex",
+    "texture": "0fa98753-96b7-475f-bfb1-f9a398eed7e3",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      2022,
+      1022
+    ],
+    "offset": [
+      -12,
+      0
+    ],
+    "originalSize": [
+      2048,
+      1024
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

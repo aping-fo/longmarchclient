@@ -1,0 +1,585 @@
+"use strict";
+cc._RF.push(module, '47edf4Gp2dPfbRAIKfd9EvC', 'GameManager');
+// scripts/GameManager.js
+
+'use strict';
+
+var httpReq = require('HttpReq');
+var gameEnum = require('GameEnum');
+var CMD = require("CMD");
+var WXTool = require("WXTool");
+var LoadingBar = require('LoadingBar');
+var AudioManager = require("AudioManager");
+var SelfTestModel = require("SelfTestModel");
+
+var LOCALSTORAGEKEY_HitoryQuestions = "HistoryQuestions";
+
+var GameManager = cc.Class({
+    extends: cc.Component,
+    properties: {
+        gameState: {
+            default: gameEnum.GAME_STATE.HOME,
+            type: cc.Enum(gameEnum.GAME_STATE)
+        },
+        myInfo: {
+            default: null,
+            type: Object
+        },
+        oppInfo: {
+            default: null,
+            type: Object
+        },
+
+        familyInfo: null, //家庭群信息
+        questions: null,
+        curQuestionIdx: -1,
+        curRound: 0,
+        callBack_matchSuc: null,
+        callBack_matchCheck: null,
+        lauchOption: null,
+        sceneGoingTo: null,
+        sceneLoaded: [],
+        sceneLoading: [],
+        testCategory: 0, //体质测试选择的体质
+        gameMode: 0,
+        chickenGroup: null,
+        chickenMode: 0, //好友，练习，匹配
+        brodcastList: null,
+        shopType: 0 //商店类别
+    },
+
+    ctor: function ctor() {
+        cc.director.getCollisionManager().enabled = true;
+
+        this.playerInfoPanel = null;
+        this.reviewPanel = null;
+        this.popupLiveNode = null;
+
+        var _this = this;
+
+        cc.loader.loadRes("prefabs/FighterNode", cc.Prefab, function (err, prefab) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.fighterNode = prefab;
+        });
+        cc.loader.loadRes("prefabs/PopupLiveNode", cc.Prefab, function (err, prefab) {
+            if (err) {
+                cc.error(err.message || err);
+                return;
+            }
+            _this.popupLiveNode = prefab;
+        });
+
+        this.initSetting();
+    },
+    // onLoad () {},
+
+    start: function start() {},
+    GetOpenId: function GetOpenId(code, callback) {
+        var data = { code: code };
+        httpReq.Post(CMD.GET_OPENID, data, function (resp) {
+            callback(resp);
+        });
+    },
+    CreateRole: function CreateRole(nick, icon, callback) {
+        var data = { nickName: nick, iconUrl: icon };
+        httpReq.Post(CMD.CREATE_ROLE, data, function (resp) {
+            callback(resp);
+        });
+    },
+    UpdateRole: function UpdateRole(nick, icon, callback) {
+        var data = { nickName: nick, iconUrl: icon };
+        httpReq.Post(CMD.UPDATE_ROLE, data, function (resp) {
+            callback(resp);
+        });
+    },
+    GetRoleInfo: function GetRoleInfo(callback) {
+        var data = {};
+        var _this = this;
+        httpReq.Post(CMD.GET_ROLE, data, function (resp) {
+            _this.myInfo.score = resp.score;
+            _this.myInfo.totalScore = resp.totalScore;
+            _this.myInfo.toolCount = resp.toolCount;
+
+            WXTool.getInstance().reportScore(_this.myInfo.totalScore);
+            callback(resp);
+        });
+    },
+
+
+    //获取道具
+    GainTool: function GainTool(callback) {
+        var data = {};
+        var _this = this;
+        httpReq.Post(CMD.GAIN_TOOL, data, function (resp) {
+            _this.myInfo.toolCount = resp;
+            callback(resp);
+        });
+    },
+
+
+    //请求匹配
+    SendMatch: function SendMatch(callback) {
+        var data = { nickName: GameManager.getInstance().myInfo['wxName'] };
+        httpReq.Post(CMD.START_MATCH, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    //请求机器人匹配
+    SendRobotMatch: function SendRobotMatch(callback) {
+        var data = { nickName: GameManager.getInstance().myInfo['wxName'], iconUrl: "", single: true };
+        httpReq.Post(CMD.START_MATCH, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    //取消匹配
+    CancelMatch: function CancelMatch(callback) {
+        var data = {};
+        httpReq.Post(CMD.END_MATCH, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //退出游戏
+    ExitGame: function ExitGame(callback) {
+        var data = {};
+        httpReq.Post(CMD.EXIT_ROOM, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //检查是否匹配到人
+    CheckMatch: function CheckMatch() {
+        var data = {};
+        var th = this;
+        httpReq.Post(CMD.GET_MATCH_RESULT, data, function (resp) {
+            if (th.callBack_matchCheck != null) {
+                th.callBack_matchCheck(resp);
+            }
+        });
+        //返回对方玩家信息，游戏开始
+    },
+
+    //请求亮题
+    GetNext: function GetNext(callback) {
+        var data = {};
+        httpReq.Post(CMD.GET_QUEST, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //检查下一轮是否开始
+    CheckNextRound: function CheckNextRound(callback) {
+        var data = {};
+        httpReq.Post(CMD.GET_QUEST, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //抢棋子
+    GrabChess: function GrabChess(idx, callback) {
+        var data = {};
+        httpReq.Post(CMD.ROB_ANSWER, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    //机器人抢棋子
+    GrabChessByRobot: function GrabChessByRobot(callback) {
+        console.log("GrabChessByRobot");
+        var data = {};
+        httpReq.Post(CMD.ROBOT_ROB_ANSWER, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    //选择答案
+    SendAnswer: function SendAnswer(idx, callback) {
+        var data = { answer: idx };
+        httpReq.Post(CMD.ANSWER_QUEST, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    //机器人选择答案
+    SendAnswerByRobot: function SendAnswerByRobot(idx, callback) {
+        console.log("SendAnswerByRobot");
+        var data = { answer: idx };
+        httpReq.Post(CMD.ROBOT_ANSWER_QUEST, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    //获得正确答案
+    GetAnswer: function GetAnswer(cfgid, callback) {
+        var data = { cfgId: cfgid };
+        httpReq.Post(CMD.GET_ANSWER, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //提交结果
+    SubmitResult: function SubmitResult(isWin, callback) {
+        var data = { isWin: isWin };
+        httpReq.Post(CMD.SUBMIT_VICTORY, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //获取当前棋盘状态
+    GetRoomResult: function GetRoomResult(callback) {
+        var data = {};
+        httpReq.Post(CMD.GET_ROOM_RESULT, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //请求题库类型
+    GetQuestBankCategory: function GetQuestBankCategory(callback) {
+        var data = {};
+        httpReq.Post(CMD.GET_QUEST_BANK_CATEGORY, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    //检查是否被抢
+    GetRobState: function GetRobState(callback) {
+        var data = {};
+        httpReq.Post(CMD.CHECK_ROB, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //创建房间
+    CreateRoom: function CreateRoom(callback) {
+        var data = {};
+        httpReq.Post(CMD.CREATE_ROOM, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+    //加入房间
+    JoinRoom: function JoinRoom(roomId, callback) {
+        var data = { roomID: roomId };
+        httpReq.Post(CMD.JOIN_ROOM, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    //请求历史题库
+    GetHistoryQuestions: function GetHistoryQuestions(callback) {
+        var data = {};
+
+        httpReq.Post(CMD.GET_HISTORY_QUESTION, data, function (resp) {
+            callback(resp);
+        });
+    },
+
+
+    ///////////////////////// 排行榜 ///////////////////////////
+    OpenFriendRank: function OpenFriendRank() {
+        var myInfo = { myInfo: this.myInfo, myFamilyInfo: this.familyInfo };
+        WXTool.getInstance().openFriendRank(myInfo);
+    },
+    OpenPlayerRank: function OpenPlayerRank(from, count) {
+        var data = { fromIndex: from, toIndex: count };
+        var myInfo = { myInfo: this.myInfo, myFamilyInfo: this.familyInfo };
+
+        httpReq.Post(CMD.GET_RANK_INFO, data, function (resp) {
+            console.log("GET_RANK_INFO ", resp);
+
+            WXTool.getInstance().openPlayerRank(resp, from, myInfo);
+        });
+    },
+
+
+    ////////////////////////大师赛//////////////////////////////
+    SignUpMasterMatch: function SignUpMasterMatch(callback) {
+        var data = {};
+        httpReq.Post(CMD.SIGN_UP_MASTERMATCH, data, callback);
+    },
+
+    //--------------------------------------吃鸡-----------------------------------------------//
+    Chicken_StartMatch: function Chicken_StartMatch(callback) {
+        var data = { mode: 3 };
+        httpReq.Post(CMD.CHICKEN_START_MATCH, data, callback);
+    },
+    Chicken_EndMatch: function Chicken_EndMatch(callback) {
+        var data = {};
+        httpReq.Post(CMD.CHICKEN_END_MATCH, data, callback);
+    },
+    Chicken_CreateRoom: function Chicken_CreateRoom(modeValue, callback) {
+        var data = { mode: modeValue };
+        httpReq.Post(CMD.CHICKEN_CREATE_ROOM, data, callback);
+    },
+    Chicken_JoinRoom: function Chicken_JoinRoom(roomIdValue, callback) {
+        var data = { roomId: roomIdValue };
+        httpReq.Post(CMD.CHICKEN_JOIN_ROOM, data, callback);
+    },
+    Chicken_GetRoomState: function Chicken_GetRoomState(callback) {
+        var data = {};
+        httpReq.Post(CMD.CHICKEN_GET_ROOM_STATUS, data, callback);
+    },
+    Chicken_GetQuestion: function Chicken_GetQuestion(callback) {
+        var data = {};
+        httpReq.Post(CMD.CHICKEN_GET_QUESTION, data, callback);
+    },
+    Chicken_GetSituation: function Chicken_GetSituation(callback) {
+        var data = {};
+        httpReq.Post(CMD.CHICKEN_GET_PLAYING_SITUATION, data, callback);
+    },
+    Chicken_SubmitAnswer: function Chicken_SubmitAnswer(openId, answerValue, questionIdValue, callback) {
+        openId = openId || GameManager.getInstance().myInfo.openId;
+        var data = { answerOpenId: openId, answer: answerValue, questionId: questionIdValue };
+        httpReq.Post(CMD.CHICKEN_SUBMIT_ANSWER, data, callback);
+    },
+    Chicken_GetResult: function Chicken_GetResult(callback) {
+        var data = {};
+        httpReq.Post(CMD.CHICKEN_GET_RESULT, data, callback);
+    },
+    Chicken_ExitRoom: function Chicken_ExitRoom(callback) {
+        var data = {};
+        httpReq.Post(CMD.CHICKEN_EXIT_ROOM, data, callback);
+    },
+    Chicken_Use_UnDeadTool: function Chicken_Use_UnDeadTool(count, callback) {
+        var data = {
+            useCount: count
+        };
+        httpReq.Post(CMD.CHICEKN_USE_UNDEADTOOL, data, callback);
+    },
+    Chicken_GET_LIMIT: function Chicken_GET_LIMIT(callback) {
+        var data = {};
+        httpReq.Post(CMD.GET_CHICKEN_LIMIT, data, callback);
+    },
+    Chicken_GET_LIMIT_RANK_LIST: function Chicken_GET_LIMIT_RANK_LIST(from, to, callback) {
+        var data = {
+            fromIndex: from,
+            toIndex: to
+        };
+        httpReq.Post(CMD.GET_CHICKEN_LIMIT_RANK_LIST, data, callback);
+    },
+    Chicken_GET_LIMIT_RANK: function Chicken_GET_LIMIT_RANK(callback) {
+        var data = {};
+        httpReq.Post(CMD.GET_CHICKEN_LIMIT_RANK, data, callback);
+    },
+    Chicken_StartNow: function Chicken_StartNow(callback) {
+        var data = {};
+        httpReq.Post(CMD.CHICEKN_SET_GAME_START, data, callback);
+    },
+
+    //--------------------------------------家庭群-----------------------------------------------//
+    Family_GetInfo: function Family_GetInfo(callback) {
+        var data = {};
+        var _this = this;
+        httpReq.Post(CMD.FAMILYGROUP_INFO, data, function (resp) {
+            _this.familyInfo = resp;
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+    Family_Create: function Family_Create(name, callback) {
+        var data = {
+            name: name
+        };
+        var _this = this;
+        httpReq.Post(CMD.FAMILYGROUP_CREATE, data, function (resp) {
+            _this.familyInfo = resp;
+
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+    Family_AddMember: function Family_AddMember(familyId, callback) {
+        var data = {
+            id: familyId
+        };
+
+        var _this = this;
+        httpReq.Post(CMD.FAMILYGROUP_ADD_MEMBER, data, function (resp) {
+            _this.familyInfo = resp;
+
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+    Family_RemoveMember: function Family_RemoveMember(openId, callback) {
+        var data = {
+            memberOpenId: openId
+        };
+        var _this = this;
+        httpReq.Post(CMD.FAMILYGROUP_REMOVE_MEMBER, data, function (resp) {
+            _this.familyInfo = resp;
+
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+    Family_Exit: function Family_Exit(callback) {
+        var data = {};
+        var _this = this;
+        httpReq.Post(CMD.FAMILYGROUP_EXIT, data, function (resp) {
+            _this.familyInfo = null;
+
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+    Family_Dissolve: function Family_Dissolve(callback) {
+        var data = {};
+        var _this = this;
+        httpReq.Post(CMD.FAMILYGROUP_DIS, data, function (resp) {
+            _this.familyInfo = null;
+
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+    Family_ModifyName: function Family_ModifyName(name, callback) {
+        var data = {
+            name: name
+        };
+
+        var _this = this;
+        httpReq.Post(CMD.FAMILYGROUP_CHANGENAME, data, function (resp) {
+            _this.familyInfo = resp;
+
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+
+    //签到
+    Sign: function Sign(callback, type) {
+        var data = { type: type };
+        httpReq.Post(CMD.SIGN, data, function (resp) {
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+
+
+    //获取公告
+    getBrodcast: function getBrodcast(callback) {
+        var data = {};
+        httpReq.Post(CMD.GET_BROADCAST, data, function (resp) {
+            if (callback) {
+                callback(resp);
+            }
+        });
+    },
+
+    //--------------------------------------商城-----------------------------------------------//
+    GetMallItems: function GetMallItems(callback) {
+        var data = {};
+        httpReq.Post(CMD.GET_MALL_ITEMS, data, callback);
+    },
+    ConsumeMallItems: function ConsumeMallItems(name, phone, address, itemId, callback) {
+        var data = { name: name, phone: phone, address: address, itemId: itemId };
+        httpReq.Post(CMD.CONSUME_MALL_ITEMS, data, callback);
+    },
+    PreLoadScene: function PreLoadScene(sceneName, callback) {
+        var self = GameManager.getInstance();
+        if (self.sceneLoading == null) {
+            self.sceneLoading = new Array();
+        }
+        self.sceneLoading.push(sceneName);
+        cc.director.preloadScene(sceneName, function () {
+            if (self.sceneLoaded == null) {
+                self.sceneLoaded = new Array();
+            }
+            self.sceneLoaded.push(sceneName);
+            for (var i = 0; i < self.sceneLoading.length; i++) {
+                if (self.sceneLoading[i] == sceneName) {
+                    self.sceneLoading[i] = "";
+                    break;
+                }
+            }
+            if (callback != null) {
+                callback();
+            }
+            if (sceneName == self.sceneGoingTo) {
+                LoadingBar.hide();
+                cc.director.loadScene(sceneName, function () {
+                    self.sceneGoingTo = null;
+                });
+            }
+        });
+    },
+    LoadScene: function LoadScene(sceneName) {
+        var self = GameManager.getInstance();
+        if (self.sceneLoaded == null || self.sceneLoaded.indexOf(sceneName) == -1) {
+            if (self.sceneLoading == null || self.sceneLoading.indexOf(sceneName) == -1) {
+                cc.director.loadScene(sceneName, function () {
+                    self.sceneGoingTo = null;
+                });
+            } else {
+                self.sceneGoingTo = sceneName;
+                LoadingBar.show();
+            }
+        } else {
+            cc.director.loadScene(sceneName, function () {
+                self.sceneGoingTo = null;
+            });
+        }
+    },
+    getHistoryQuestionsUrl: function getHistoryQuestionsUrl() {
+        var str = cc.sys.localStorage.getItem(LOCALSTORAGEKEY_HitoryQuestions);
+        if (str == null) {
+            str = "";
+            cc.sys.localStorage.setItem(LOCALSTORAGEKEY_HitoryQuestions, str);
+        }
+
+        return str;
+    },
+    setHistoryQuestionsUrl: function setHistoryQuestionsUrl(str) {
+        cc.sys.localStorage.setItem(LOCALSTORAGEKEY_HitoryQuestions, str);
+    },
+    getChickenPlayer: function getChickenPlayer(openId) {
+        if (this.chickenGroup == null) {
+            return null;
+        }
+        for (var i = 0; i < this.chickenGroup.length; i++) {
+            if (this.chickenGroup[i].openId == openId) {
+                return this.chickenGroup[i];
+            }
+        }
+        return null;
+    },
+
+
+    ///////////////////////设置////////////////////////////////
+    initSetting: function initSetting() {
+        AudioManager.getInstance().init();
+    }
+});
+GameManager._instance = null;
+GameManager.getInstance = function () {
+    if (!GameManager._instance) {
+        GameManager._instance = new GameManager();
+    }
+    return GameManager._instance;
+};
+
+module.exports = GameManager;
+
+cc._RF.pop();

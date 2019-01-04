@@ -1,0 +1,47 @@
+"use strict";
+cc._RF.push(module, '1a5cbdx/GVK67Kzv5vrgHmQ', 'RankPanel');
+// scripts/RankPanel.js
+
+"use strict";
+
+var GameManager = require("GameManager");
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+
+        toggleContainer: {
+            type: cc.ToggleContainer,
+            default: null
+        }
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad: function onLoad() {
+        for (var i = 0; i < this.toggleContainer.toggleItems.length; i++) {
+            this.toggleContainer.toggleItems[i].node.on("toggle", this.onToggleClick, this);
+        }
+    },
+    start: function start() {
+        this.m_globalPageIndex = 0;
+        this.m_globalCount = 50;
+
+        this.onToggleClick(this.toggleContainer.toggleItems[0]);
+        this.toggleContainer.toggleItems[0].check();
+    },
+    update: function update(dt) {},
+    onToggleClick: function onToggleClick(toggle) {
+        if (toggle.node.name == "friend_Toggle") {
+            GameManager.getInstance().OpenFriendRank();
+        } else if (toggle.node.name == "world_Toggle") {
+            GameManager.getInstance().OpenPlayerRank(this.m_globalPageIndex, this.m_globalCount);
+        }
+    },
+    onBackBtnClick: function onBackBtnClick(btn) {
+        cc.director.loadScene("main");
+    }
+});
+
+cc._RF.pop();

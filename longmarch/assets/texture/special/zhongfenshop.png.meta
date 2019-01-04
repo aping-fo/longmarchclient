@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "ee342aef-7c90-4920-8585-ff1b8ff49c54",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "zhongfenshop": {
+      "ver": "1.0.3",
+      "uuid": "35a4a5d0-d3d9-41f6-95ed-e50ae89df8c6",
+      "rawTextureUuid": "ee342aef-7c90-4920-8585-ff1b8ff49c54",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 573,
+      "height": 982,
+      "rawWidth": 573,
+      "rawHeight": 982,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

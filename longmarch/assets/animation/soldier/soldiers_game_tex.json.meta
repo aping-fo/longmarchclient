@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "719fa4b2-1232-49f8-bec8-f1a8527af60f",
+  "atlasJson": "{\"SubTexture\":[{\"width\":132,\"y\":205,\"height\":42,\"name\":\"shadow\",\"x\":1},{\"width\":10,\"y\":225,\"height\":20,\"name\":\"soldiers2/leg2\",\"x\":188},{\"width\":11,\"y\":225,\"height\":22,\"name\":\"soldiers2/leg1\",\"x\":156},{\"width\":14,\"y\":1,\"height\":13,\"name\":\"soldiers2/feet2\",\"x\":200},{\"width\":17,\"y\":225,\"height\":13,\"name\":\"soldiers2/feet1\",\"x\":169},{\"width\":9,\"y\":1,\"height\":14,\"name\":\"soldiers2/arm2\",\"x\":157},{\"width\":13,\"y\":240,\"height\":15,\"name\":\"soldiers2/arm1\",\"x\":169},{\"width\":149,\"y\":1,\"height\":202,\"name\":\"soldiers2/body\",\"x\":1},{\"width\":19,\"y\":225,\"height\":18,\"name\":\"soldiers2/hand2\",\"x\":135},{\"width\":20,\"y\":205,\"height\":18,\"name\":\"soldiers2/hand1\",\"x\":135}],\"width\":256,\"height\":256,\"name\":\"soldiers_game\",\"imagePath\":\"soldiers_game_tex.png\"}",
+  "texture": "0103f714-0405-4ccd-9108-178a13f014b7",
+  "subMetas": {}
+}

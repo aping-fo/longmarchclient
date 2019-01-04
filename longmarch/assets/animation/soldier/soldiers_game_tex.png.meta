@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "0103f714-0405-4ccd-9108-178a13f014b7",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "soldiers_game_tex": {
+      "ver": "1.0.3",
+      "uuid": "623f19b9-7091-48f7-a1e5-18736b6f0cf2",
+      "rawTextureUuid": "0103f714-0405-4ccd-9108-178a13f014b7",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -20.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 213,
+      "height": 254,
+      "rawWidth": 256,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

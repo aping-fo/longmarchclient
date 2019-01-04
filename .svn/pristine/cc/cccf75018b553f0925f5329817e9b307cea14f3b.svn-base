@@ -1,0 +1,130 @@
+"use strict";
+cc._RF.push(module, 'e6b93HJ3AdKbKLLTxwLMxxN', 'shopPanel');
+// scripts/shopPanel.js
+
+"use strict";
+
+var GameManager = require("GameManager");
+var httpReq = require('HttpReq');
+var Alert = require("Alert");
+var data;
+var selectedId;
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        item: {
+            default: null,
+            type: cc.Node,
+            serializable: true
+        },
+        itemCanvas: {
+            default: null,
+            type: cc.Node,
+            serializable: true
+        },
+        infoBoard: {
+            default: null,
+            type: cc.Node,
+            serializable: true
+        },
+        btn_cancel: {
+            default: null,
+            type: cc.Button,
+            serializable: true
+        },
+        btn_confirm: {
+            default: null,
+            type: cc.Button,
+            serializable: true
+        },
+        lbl_name: {
+            default: null,
+            type: cc.EditBox,
+            serializable: true
+        },
+        lbl_address: {
+            default: null,
+            type: cc.EditBox,
+            serializable: true
+        },
+        lbl_phone: {
+            default: null,
+            type: cc.EditBox,
+            serializable: true
+        },
+        lbl_currentCoin: {
+            default: null,
+            type: cc.Label,
+            serializable: true
+        },
+        items: [cc.Node]
+    },
+
+    onLoad: function onLoad() {
+
+        this.btn_cancel.node.on("click", this.onCancel, this);
+        this.btn_confirm.node.on("click", this.onConfirm, this);
+        httpReq.errorHandler['5001' + '_' + '900'] = function () {
+            Alert.show('积分不足', function () {}, false);
+        };
+    },
+    setItemContent: function setItemContent(data, item) {
+        cc.find("renderNode/lbl_name", item).getComponent(cc.Label).string = data.name;
+        cc.find("renderNode/lbl_pts", item).getComponent(cc.Label).string = '积分' + data.pts;
+    },
+    itemClick: function itemClick(event) {
+        var idx = this.items.indexOf(event.target);
+        selectedId = data[idx].id;
+        var need = data[idx].pts;
+        var have = GameManager.getInstance().shopType == 0 ? GameManager.getInstance().myInfo.score : GameManager.getInstance().myInfo.limitScore;
+        if (have < need) {
+            Alert.show('积分不足', function () {}, false);
+        } else {
+            this.infoBoard.active = true;
+        }
+    },
+    onCancel: function onCancel(event) {
+        this.infoBoard.active = false;
+    },
+    onConfirm: function onConfirm(event) {
+        GameManager.getInstance().ConsumeMallItems(this.lbl_name.string, this.lbl_phone.string, this.lbl_address.string, selectedId, function (resp) {
+            console.log(resp);
+        });
+        this.infoBoard.active = false;
+    },
+    start: function start() {
+        this.lbl_currentCoin.string = GameManager.getInstance().shopType == 0 ? GameManager.getInstance().myInfo.score : GameManager.getInstance().myInfo.limitScore;
+        this.infoBoard.active = false;
+        var _this = this;
+        cc.find('renderNode', _this.item).setScale(0);
+        GameManager.getInstance().GetMallItems(function (resp) {
+            _this.items = new Array();
+            data = resp.mallItems;
+            var total = data.length;
+            var idx = 0;
+            cc.find('renderNode', _this.item).setScale(0.2);
+            for (var i = 0; i < total; i++) {
+                if (data[i].type == GameManager.getInstance().shopType) {
+                    var item = idx == 0 ? _this.item : cc.instantiate(_this.item);
+                    item.on("click", _this.itemClick, _this);
+                    item.parent = _this.itemCanvas;
+                    _this.setItemContent(data[i], item);
+                    _this.items.push(item);
+                    var action = cc.sequence(cc.scaleTo(0.2, 1.03), cc.scaleTo(0.1, 1));
+                    cc.find('renderNode', item).runAction(action);
+                    idx++;
+                }
+            }
+            // _this.itemCanvas.getComponent(cc.Layout).updateLayout();
+        });
+    },
+    onBackToMain: function onBackToMain(btn) {
+        cc.director.loadScene('main');
+    }
+
+    // update (dt) {},
+
+});
+
+cc._RF.pop();
